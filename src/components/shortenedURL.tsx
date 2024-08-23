@@ -17,18 +17,18 @@ const ShortenedURL: React.FC<ShortenedURLProps> = ({ shortCode }) => {
       p={6}
       mt={4}
       bg="white"
-      borderRadius="md"
-      shadow="md"
-      width="100vh"
+      borderRadius="lg"
+      shadow="lg"
+      width={{ base: '90%', sm: '80%', md: '70%' }}
       maxW="500px"
       transition="transform 0.3s ease-in-out"
-      _hover={{ transform: 'scale(1.03)' }}
+      _hover={{ transform: 'scale(1.03)', shadow: 'xl' }}
       textAlign="center"
     >
-      <Text fontSize="lg" fontWeight="bold" mb={2}>
+      <Text fontSize="lg" fontWeight="bold" mb={2} color="teal.600">
         Your short URL:
       </Text>
-      <Link href={shortUrl} color="teal.500" isExternal fontSize="lg">
+      <Link href={shortUrl} color="teal.500" isExternal fontSize="lg" wordBreak="break-all">
         {shortUrl}
       </Link>
     </Box>

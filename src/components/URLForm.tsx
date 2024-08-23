@@ -1,5 +1,5 @@
 import React, { useState, FormEvent } from 'react';
-import { Button, Input, Box, FormControl, FormLabel, Text, Link } from '@chakra-ui/react';
+import { Button, Input, Box, FormControl, FormLabel, Text, Link, Heading } from '@chakra-ui/react';
 import { supabase } from '../supabaseClient';
 
 interface URLFormProps {
@@ -63,10 +63,18 @@ const URLForm: React.FC<URLFormProps> = ({ onShortened }) => {
       justifyContent="center"
       minHeight="100vh"
       width="100vw"
-      bg="teal.500"
+      bg="linear(to-r, #008080, #0000ff)"
       p={4}
       overflowX="hidden"
     >
+      <Box textAlign="center" mb={8}>
+        <Heading as="h1" size="2xl" color="white" mb={2}>
+          URL Shortener
+        </Heading>
+        <Text fontSize="lg" color="white" maxW="lg">
+          Shorten your long URLs easily and efficiently. Just paste your URL below and get a shorter version in no time!
+        </Text>
+      </Box>
       <Box
         bg="white"
         p={8}
@@ -79,18 +87,22 @@ const URLForm: React.FC<URLFormProps> = ({ onShortened }) => {
         textAlign="center"
       >
         <FormControl id="url">
-          <FormLabel fontSize="lg" fontWeight="bold" mb={2}>Enter your URL</FormLabel>
+          <FormLabel fontSize="lg" color="teal" fontWeight="bold" mb={2}>Enter your URL</FormLabel>
           <Input
             value={longUrl}
             onChange={(e) => setLongUrl(e.target.value)}
             placeholder="https://example.com"
             variant="outline"
             mb={8}
+            color="teal"
+            borderColor="teal"
             size="lg"
+            _hover={{ bg: 'gray.100' }}
           />
         </FormControl>
         <Button
-          colorScheme="teal"
+          color="white"
+          bgColor="teal.500"
           isLoading={loading}
           onClick={handleSubmit}
           width="full"
@@ -103,7 +115,7 @@ const URLForm: React.FC<URLFormProps> = ({ onShortened }) => {
 
         {shortUrl && (
           <Box mt={4}>
-            <Text fontSize="lg" fontWeight="bold" mb={2}>Your short URL:</Text>
+            <Text fontSize="lg" color="teal" fontWeight="bold" mb={2}>Your short URL:</Text>
             <Link href={shortUrl} color="teal.500" isExternal fontSize="lg">
               {shortUrl}
             </Link>
