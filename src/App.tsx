@@ -4,7 +4,7 @@ import URLForm from './components/URLForm';
 import ShortenedURL from './components/shortenedURL';
 import { supabase } from './supabaseClient';
 
-const Redirect = () => {
+const Redirect: React.FC = () => {
   const { shortCode } = useParams<{ shortCode: string }>();
 
   useEffect(() => {
@@ -17,18 +17,18 @@ const Redirect = () => {
 
       if (data) {
         window.location.href = data.original_url;
-      } else {
-        console.error('Error fetching URL:', error?.message || 'No matching URL found');
+      } else if (error) {
+        console.error('Error fetching URL:', error.message);
       }
     };
 
     fetchOriginalUrl();
   }, [shortCode]);
 
-  return <div>Redirecting...</div>;
+  return null;
 };
 
-const App = () => {
+const App: React.FC = () => {
   const [shortCode, setShortCode] = useState<string>('');
 
   const handleShortened = (code: string) => {
@@ -39,8 +39,8 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" element={<URLForm onShortened={handleShortened} />} />
-        <Route path="/shortened" element={<ShortenedURL shortCode={shortCode} />} />
         <Route path="/:shortCode" element={<Redirect />} />
+        <Route path="/shortened" element={<ShortenedURL shortCode={shortCode} />} />
       </Routes>
     </Router>
   );
