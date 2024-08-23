@@ -56,27 +56,60 @@ const URLForm: React.FC<URLFormProps> = ({ onShortened }) => {
   };
 
   return (
-    <Box>
-      <FormControl id="url">
-        <FormLabel>Enter your URL</FormLabel>
-        <Input
-          value={longUrl}
-          onChange={(e) => setLongUrl(e.target.value)}
-          placeholder="https://example.com"
-        />
-      </FormControl>
-      <Button mt={4} colorScheme="teal" isLoading={loading} onClick={handleSubmit}>
-        Shorten URL
-      </Button>
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      minHeight="100vh"
+      width="100vw"
+      bg="teal.500"
+      p={4}
+      overflowX="hidden"
+    >
+      <Box
+        bg="white"
+        p={8}
+        borderRadius="lg"
+        shadow="xl"
+        width={{ base: '90%', sm: '70%', md: '50%' }}
+        maxW="500px"
+        transition="transform 0.3s ease-in-out"
+        _hover={{ transform: 'scale(1.03)' }}
+        textAlign="center"
+      >
+        <FormControl id="url">
+          <FormLabel fontSize="lg" fontWeight="bold" mb={2}>Enter your URL</FormLabel>
+          <Input
+            value={longUrl}
+            onChange={(e) => setLongUrl(e.target.value)}
+            placeholder="https://example.com"
+            variant="outline"
+            mb={8}
+            size="lg"
+          />
+        </FormControl>
+        <Button
+          colorScheme="teal"
+          isLoading={loading}
+          onClick={handleSubmit}
+          width="full"
+          size="lg"
+          mb={8}
+          _hover={{ bg: 'teal.600' }}
+        >
+          Shorten URL
+        </Button>
 
-      {shortUrl && (
-        <Box mt={4}>
-          <Text>Your short URL:</Text>
-          <Link href={shortUrl} color="teal.500">
-            {shortUrl}
-          </Link>
-        </Box>
-      )}
+        {shortUrl && (
+          <Box mt={4}>
+            <Text fontSize="lg" fontWeight="bold" mb={2}>Your short URL:</Text>
+            <Link href={shortUrl} color="teal.500" isExternal fontSize="lg">
+              {shortUrl}
+            </Link>
+          </Box>
+        )}
+      </Box>
     </Box>
   );
 };
